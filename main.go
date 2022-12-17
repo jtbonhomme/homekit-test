@@ -24,7 +24,7 @@ func main() {
 
 	// Create the testing accessory.
 	a := accessory.NewSwitch(accessory.Info{
-		Name: "MBP-JTB",
+		Name: "MBP-DEMO",
 	})
 	a.Switch.On.OnValueRemoteUpdate(func(on bool) {
 		if on == true {
@@ -45,7 +45,9 @@ func main() {
 		// stop if an error happens
 		logger.Panic().Msgf("failed while creating new HAP server: %s", err.Error())
 	}
-	logger.Info().Msg("Homekit demo server started")
+	server.Pin = "00102003" // default pincode
+
+	logger.Info().Msgf("Homekit demo server started (%s)", server.Pin)
 
 	// Setup a listener for interrupts and SIGTERM signals
 	// to stop the server.
